@@ -6,15 +6,12 @@ function createTaskBoardTemplate() {
         `
         <li class="tasks-item">
             <h4 class="title-tasks backlog">Бэклог</h4>
-            <ul class="tasks backlog">    
-               
+            <ul class="tasks backlog">
             </ul>
         </li>
         `
       );
-    
 }
-
 
 export default class TaskBoardComponent {
   getTemplate() {

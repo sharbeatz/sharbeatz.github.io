@@ -1,4 +1,4 @@
-.task-list {
+.task-list   {
     font-family: Arial, sans-serif;
     display: flex;
     padding: 25px;
@@ -21,6 +21,7 @@
     list-style-type: none;
     background-color: #808080;
     color: whitesmoke;
+    display: flex;
 }
 
 .title-tasks.in-progress {
@@ -38,6 +39,4 @@
     color: whitesmoke;
 }
 
-.taskboard {
-    display: flex;
-}
+

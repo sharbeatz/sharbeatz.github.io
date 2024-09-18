@@ -7,7 +7,6 @@ function createTaskTemplate() {
         <li class="task">Выучить JS</li>
         `
       );
-    
 }
 
 
