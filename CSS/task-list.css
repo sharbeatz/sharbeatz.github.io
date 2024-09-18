@@ -5,35 +5,41 @@
 }
 
 .tasks {
-    list-style-type: none;
     margin: 0;
     flex: 1; 
     padding: 10px;
 }
 
-li h4 {
+.title-tasks {
     border-radius: 7px; 
     border: 1px solid #ccc;
     padding: 10px;
-    margin-right: 300px;    
+    margin-right: 300px;
 }
 
-.tasks.backlog h4{
+.title-tasks.backlog {
+    list-style-type: none;
     background-color: #808080;
     color: whitesmoke;
 }
 
-.tasks.in-progress h4{
+.title-tasks.in-progress {
     background-color: #0077ff;
     color: whitesmoke;
 }   
 
-.tasks.done h4{
+.title-tasks.done {
     background-color: #00a550;
     color: whitesmoke;
 }
 
-.tasks.trash h4 {
+.title-tasks.trash {
     background-color: #f82525c8;
     color: whitesmoke;
+}
+
+.taskboard {
+    display: flex;
+   
+  
 }
