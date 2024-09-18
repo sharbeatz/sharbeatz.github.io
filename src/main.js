@@ -7,14 +7,18 @@ import {render, RenderPosition} from './framework/render.js';
 
 const bodyContainer= document.querySelector('.board-app');
 const formContainer = document.querySelector('.add-task');
-const TaskBoard = document.querySelector('.taskboard');
-const Task = document.querySelector('.task')
+const taskBoardContainer = document.querySelector('.taskboard');
 
 render(new HeaderComponent(), bodyContainer, RenderPosition.BEFOREBEGIN);
 render(new FormAddTaskComponent(), formContainer, RenderPosition.AFTERBEGIN);
-render(new TaskBoardComponent(), TaskBoard, RenderPosition.BEFOREEND);
-render(new TaskComponent(), Task, RenderPosition.BEFOREEND);
 
+for(let i = 0; i < 4; i++) {
+    render(new TaskBoardComponent(), taskBoardContainer, RenderPosition.BEFOREEND);
 
-
-
+    const currentTaskBoard = taskBoardContainer.lastElementChild;
+    
+    for (let j = 0; j < 4; j++) {
+        const taskComponent = new TaskComponent();
+        render(taskComponent, currentTaskBoard, RenderPosition.BEFOREEND);
+    }
+}

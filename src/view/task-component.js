@@ -4,7 +4,7 @@ import {createElement} from '../framework/render.js';
 function createTaskTemplate() {
     return (
         `
-        <li class="tasks-item">Выучить JS</li>
+        <li class="task">Выучить JS</li>
         `
       );
     
