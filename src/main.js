@@ -7,7 +7,7 @@ import {render, RenderPosition} from './framework/render.js';
 
 const bodyContainer= document.querySelector('.board-app'); // Здесь мы создаем константу и кладем туда расположение "где у нас находится класс в HTML" в данном случае <..class="board-app">
 const formContainer = document.querySelector('.add-task');
-const taskBoardContainer = document.querySelector('.taskboard');
+const taskBoardContainer = document.querySelector('.task-list');
 
 render(new HeaderComponent(), bodyContainer, RenderPosition.BEFOREBEGIN); // По сути мы говорим "Создай шапку и помести ее туда, где указан путь bodyContainer". Шапка опредлена в header-component.js
 render(new FormAddTaskComponent(), formContainer, RenderPosition.AFTERBEGIN);

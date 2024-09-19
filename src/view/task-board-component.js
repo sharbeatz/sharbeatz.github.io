@@ -4,7 +4,7 @@ import {createElement} from '../framework/render.js';
 function createTaskBoardTemplate() {
     return (
         `
-        <li class="tasks-item">
+        <li class="tasks">
             <h4 class="title-tasks backlog">Бэклог</h4>
             <ul class="tasks backlog">
             </ul>
@@ -23,7 +23,6 @@ export default class TaskBoardComponent {
     if (!this.element) {
       this.element = createElement(this.getTemplate());
     }
-
 
     return this.element;
   }
