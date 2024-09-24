@@ -27,6 +27,7 @@
 .title-tasks.in-progress {
     background-color: #0077ff;
     color: whitesmoke;
+    white-space: nowrap; 
 }   
 
 .title-tasks.done {

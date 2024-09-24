@@ -1,47 +1,49 @@
+import { Status } from '../const.js'; // Импортируем константы
+
 export const tasks = [
-    {
-        'id': '1',
-        'title': 'Выучить JS',
-        'status': 'backlog',
-    },
-    {
-        'id': '2',
-        'title': 'Выучить React',
-        'status': 'backlog',
-    },
-    {
-        'id': '3',
-        'title': 'Разобраться с Redux',
-        'status': 'in-progress',
-    },
-    {
-        'id': '4',
-        'title': 'Написать TODO-приложение',
-        'status': 'done',
-    },
-    {
-        'id': '5',
-        'title': 'Изучить TypeScript',
-        'status': 'backlog',
-    },
-    {
-        'id': '6',
-        'title': 'Развернуть приложение на сервере',
-        'status': 'in-progress',
-    },
-    {
-        'id': '7',
-        'title': 'Оформить документацию',
-        'status': 'done',
-    },
-    {
-        'id': '8',
-        'title': 'Удалить старый проект',
-        'status': 'trash',
-    },
-    {
-        'id': '9',
-        'title': 'Написать тесты для приложения',
-        'status': 'backlog',
-    }
-]
+  {
+    id: '1',
+    title: 'Выучить JS',
+    status: Status.BACKLOG,
+  },
+  {
+    id: '2',
+    title: 'Выучить React',
+    status: Status.BACKLOG,
+  },
+  {
+    id: '3',
+    title: 'Сделать лабораторную',
+    status: Status.PROCESSING,
+  },
+  {
+    id: '4',
+    title: 'Написать отчет',
+    status: Status.DONE,
+  },
+  {
+    id: '5',
+    title: 'Купить хлеб',
+    status: Status.BACKLOG,
+  },
+  {
+    id: '6',
+    title: 'Написать эссе',
+    status: Status.PROCESSING,
+  },
+  {
+    id: '7',
+    title: 'Поспать',
+    status: Status.DONE,
+  },
+  {
+    id: '8',
+    title: 'Купить кофе-машину',
+    status: Status.BASKET,
+  },
+  {
+    id: '9',
+    title: 'Проверить работу',
+    status: Status.BACKLOG,
+  }
+];

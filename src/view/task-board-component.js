@@ -4,7 +4,7 @@ import {createElement} from '../framework/render.js';
 function createTaskBoardTemplate() {
     return (
         `
-        <ul class="tasks">
+        <ul class="task-list">
 
         </ul>
         `

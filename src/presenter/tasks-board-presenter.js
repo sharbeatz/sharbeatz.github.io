@@ -1,31 +1,59 @@
+import { Status } from '../const.js'; // Импортируем константы
 import TasksListComponent from '../view/tasks-list-component.js';
 import TaskComponent from '../view/task-component.js';
 import TaskBoardComponent from '../view/task-board-component.js';
-import {render} from '../framework/render.js';
+import { render } from '../framework/render.js';
+import ClearButtonComponent from '../view/clear-button-component.js'; // Импорт кнопки
 
 export default class TasksBoardPresenter {
- tasksBoardComponent = new TaskBoardComponent()
- taskListComponent = new TasksListComponent();
+  tasksBoardComponent = new TaskBoardComponent();
 
+  constructor({ boardContainer, tasksModel }) {
+    this.boardContainer = boardContainer;
+    this.tasksModel = tasksModel;
+  }
 
- constructor({boardContainer, tasksModel}) {
-   this.boardContainer = boardContainer;
-   this.tasksModel = tasksModel;
- }
-
- init() {
+  init() {
     this.boardTasks = [...this.tasksModel.getTasks()];
 
-   render(this.tasksBoardComponent, this.boardContainer);
-   for (let i = 0; i < 4; i++) {
-       const tasksListComponent = new TasksListComponent();
-       render(tasksListComponent, this.tasksBoardComponent.getElement());
-      
-       for (let j = 0; j < 4; j++) {
-           const taskComponent = new TaskComponent();
-           render(taskComponent, tasksListComponent.getElement());
-       }
-   }
- 
- }
+    // Используем константы Status для создания групп
+    const tasksByStatus = {
+      [Status.BACKLOG]: [],
+      [Status.PROCESSING]: [],
+      [Status.DONE]: [],
+      [Status.BASKET]: []
+    };
+
+    // Распределяем задачи по статусам
+    for (let i = 0; i < this.boardTasks.length; i++) {
+      const task = this.boardTasks[i];
+      tasksByStatus[task.status].push(task);
+    }
+
+    // Рендерим доску задач
+    render(this.tasksBoardComponent, this.boardContainer);
+
+    // Проходим по каждому статусу и рендерим список задач
+    const statuses = Object.keys(tasksByStatus);
+    for (let i = 0; i < statuses.length; i++) {
+      const status = statuses[i];
+      const tasksListComponent = new TasksListComponent({ status });
+      render(tasksListComponent, this.tasksBoardComponent.getElement());
+
+      // Проходим по каждой задаче внутри данного статуса и рендерим её
+      const tasks = tasksByStatus[status];
+      for (let j = 0; j < tasks.length; j++) {
+        const task = tasks[j];
+        const taskComponent = new TaskComponent({ task });
+        render(taskComponent, tasksListComponent.getElement());
+      }
+
+      // Если статус "Корзина", добавляем кнопку очистки ниже списка задач
+      if (status === Status.BASKET) {
+        const clearButtonComponent = new ClearButtonComponent();
+        // Рендерим кнопку очистки в родительский элемент списка задач
+        render(clearButtonComponent, tasksListComponent.getElement());
+      }
+    }
+  }
 }
