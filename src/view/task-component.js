@@ -2,7 +2,7 @@ import {createElement} from '../framework/render.js';
 
 
 function createTaskTemplate(task) {
-  const {title, status} = task;
+  const {title} = task;
     return (
         `
         <li class="task">${title}</li>
@@ -13,7 +13,7 @@ function createTaskTemplate(task) {
 
 export default class TaskComponent {
 
-  constructor({task}) {
+  constructor({ task }) {
     this.task = task;
   }
 

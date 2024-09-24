@@ -16,7 +16,7 @@ const taskBoardContainer = document.querySelector('.task-list');
 
 const tasksModel = new TasksModel();
 const tasksBoardPresenter = new TasksBoardPresenter({
-    boardContainer: tasksBoardContainer,
+    boardContainer: taskBoardContainer,
     tasksModel,
    });
    

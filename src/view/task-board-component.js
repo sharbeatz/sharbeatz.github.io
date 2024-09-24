@@ -4,11 +4,9 @@ import {createElement} from '../framework/render.js';
 function createTaskBoardTemplate() {
     return (
         `
-        <li class="tasks">
-            <h4 class="title-tasks backlog">Бэклог</h4>
-            <ul class="tasks backlog">
-            </ul>
-        </li>
+        <ul class="tasks">
+
+        </ul>
         `
       );
 }
