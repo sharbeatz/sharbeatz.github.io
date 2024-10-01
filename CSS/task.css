@@ -1,4 +1,5 @@
 .task {
+    width: 100%;
     border: 1px solid #ccc;
     border-radius: 7px;
     margin: 10px 0;

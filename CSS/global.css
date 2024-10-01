@@ -1,6 +1,14 @@
 body {
+    /* add */
+        margin: 0; 
+        padding: 0;
+
     font-family: "Montserrat", sans-serif;
     background-color:  #DCF0FB
+}
+* {
+    /* add */
+    box-sizing: border-box;
 }
 li {
     list-style-type: none;

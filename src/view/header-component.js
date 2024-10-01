@@ -3,10 +3,10 @@ import {createElement} from '../framework/render.js';
 
 function createHeaderComponentTemplate() {
     return (
-        `    <header>    
-        <div class="container"> 
+        `    <header class="header">    
+        
             <h2>Список задач</h2>
-        </div>
+        
     </header>`
       );
 }

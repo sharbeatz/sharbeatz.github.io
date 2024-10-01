@@ -2,15 +2,20 @@
     font-family: Arial, sans-serif;
     display: flex;
     padding: 25px;
+    flex-wrap: wrap;
 }
 
 .tasks {
-    margin: 0;
+    /* add */
+    width: 100% ;
+
+    margin-right: 10px;
     flex: 1; 
     padding: 10px;
 }
 
 .title-tasks {
+    width: 100%;
     border-radius: 7px; 
     border: 1px solid #ccc;
     padding: 10px;
