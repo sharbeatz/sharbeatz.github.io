@@ -1,5 +1,7 @@
-import { createElement } from '../framework/render.js';
+// import { createElement } from '../framework/render.js';
 import { Status, StatusLabel } from '../const.js';
+import { AbstractComponent } from './abstract-component.js';
+
 
 function createTaskListTemplate({ status }) {
   return (
@@ -13,7 +15,7 @@ function createTaskListTemplate({ status }) {
   );
 }
 
-export default class TasksListComponent {
+export default class TasksListComponent extends AbstractComponent{
   constructor({ status }) {
     this.status = status;
   }
@@ -22,14 +24,14 @@ export default class TasksListComponent {
     return createTaskListTemplate({ status: this.status });
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-    return this.element;
-  }
+//   getElement() {
+//     if (!this.element) {
+//       this.element = createElement(this.getTemplate());
+//     }
+//     return this.element;
+//   }
 
-  removeElement() {
-    this.element = null;
-  }
-}
+//   removeElement() {
+//     this.element = null;
+//   }
+ }

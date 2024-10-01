@@ -8,8 +8,6 @@ import TaskComponent from './view/task-component.js';
 
 
 
-
-
 import {render, RenderPosition} from './framework/render.js';
 
 const bodyContainer= document.querySelector('.board-app'); // Здесь мы создаем константу и кладем туда расположение "где у нас находится класс в HTML" в данном случае <..class="board-app">
