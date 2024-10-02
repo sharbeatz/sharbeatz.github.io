@@ -13,7 +13,7 @@ function createHeaderComponentTemplate() {
 
 
 export default class HeaderComponent extends AbstractComponent {
-  getTemplate() {
+  get template() {
     return createHeaderComponentTemplate();
   }
 }

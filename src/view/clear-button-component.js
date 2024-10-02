@@ -11,22 +11,10 @@ function createClearButtonComponentTemplate() {
 
 
 export default class ClearButtonComponent {
-  getTemplate() {
+  get template() {
     return createClearButtonComponentTemplate();
   }
 
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
 
-
-    return this.element;
-  }
-
-
-  removeElement() {
-    this.element = null;
-  }
 }

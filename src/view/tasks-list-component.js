@@ -17,10 +17,12 @@ function createTaskListTemplate({ status }) {
 
 export default class TasksListComponent extends AbstractComponent{
   constructor({ status }) {
+    super(); // Необходимо вызывать super() для наследования от AbstractComponent
     this.status = status;
+
   }
 
-  getTemplate() {
+  get template() {
     return createTaskListTemplate({ status: this.status });
   }
 

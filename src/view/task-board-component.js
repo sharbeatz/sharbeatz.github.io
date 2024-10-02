@@ -13,9 +13,10 @@ function createTaskBoardTemplate() {
 }
 
 export default class TaskBoardComponent extends AbstractComponent{
-  getTemplate() {
+  get template() {
     return createTaskBoardTemplate();
   }
+
 
 
 //   getElement() {
