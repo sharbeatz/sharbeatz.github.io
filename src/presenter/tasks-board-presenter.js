@@ -57,6 +57,7 @@
 //     }
 //   }
 // }
+
 import { Status } from '../const.js'; // Импортируем константы
 import TasksListComponent from '../view/tasks-list-component.js';
 import TaskComponent from '../view/task-component.js';
@@ -119,6 +120,6 @@ export default class TasksBoardPresenter {
 
   #renderTask(task, container) {
     const taskComponent = new TaskComponent({ task });
-    render(taskComponent.element, container); // Используем element
+    render(taskComponent, container); // Используем taskComponent
   }
 }

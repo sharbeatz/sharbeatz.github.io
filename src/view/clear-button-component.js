@@ -1,5 +1,5 @@
 import {createElement} from '../framework/render.js';
-
+import { AbstractComponent } from './abstract-component.js';
 
 function createClearButtonComponentTemplate() {
     return (
@@ -10,7 +10,7 @@ function createClearButtonComponentTemplate() {
 }
 
 
-export default class ClearButtonComponent {
+export default class ClearButtonComponent extends AbstractComponent {
   get template() {
     return createClearButtonComponentTemplate();
   }
