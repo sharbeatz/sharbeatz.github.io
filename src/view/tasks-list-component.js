@@ -3,7 +3,7 @@ import { Status, StatusLabel } from '../const.js';
 import { AbstractComponent } from './abstract-component.js';
 
 
-function createTaskListTemplate({ status }) {
+function createTaskListTemplate({ status, label }) {
   return (
     `
     <li class="tasks">
@@ -16,14 +16,15 @@ function createTaskListTemplate({ status }) {
 }
 
 export default class TasksListComponent extends AbstractComponent{
-  constructor({ status }) {
+  constructor({ status, label }) {
     super(); // Необходимо вызывать super() для наследования от AbstractComponent
     this.status = status;
+    this.label = label;
 
   }
 
   get template() {
-    return createTaskListTemplate({ status: this.status });
+    return createTaskListTemplate({ status: this.status, label: this.label});
   }
 
 //   getElement() {

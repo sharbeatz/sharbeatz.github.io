@@ -14,7 +14,16 @@ export default class ClearButtonComponent extends AbstractComponent {
   get template() {
     return createClearButtonComponentTemplate();
   }
-
-
-
+  #handleClick = null;
+  constructor ({onClick}) {
+    super();  // <--- Необходимо вызывать перед использованием 'this'
+    this.#handleClick = onClick;
+    this.element.addEventListener('submit', this.#clickHandler);
+    }
+    #clickHandler = (evt) => {
+      evt.preventDefault();
+      this.#handleClick();
+  }
 }
+
+

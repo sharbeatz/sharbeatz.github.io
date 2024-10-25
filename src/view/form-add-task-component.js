@@ -8,8 +8,8 @@ function createFormAddTaskComponentTemplate() {
                 <div class="container">   
                     <label>Новая задача</label>
                     <div class="add-task">
-                        <input type="text" placeholder="Название задачи...">     
-                        <button>+ Добавить</button>
+                        <input type="text" id="add-task" placeholder="Название задачи...">     
+                        <button type = "submit">+ Добавить</button>
                     </div>      
                 </div>    
             </section>
@@ -19,9 +19,21 @@ function createFormAddTaskComponentTemplate() {
 
 
 export default class FormAddTaskComponent extends AbstractComponent {
+    #handleClick = null;
+    constructor ({onClick}) {
+    super();  // <--- Необходимо вызывать перед использованием 'this'
+    this.#handleClick = onClick;
+    this.element.addEventListener('submit', this.#clickHandler);
+
+    }
   get template() {
     return createFormAddTaskComponentTemplate();
   }
+
+#clickHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleClick();
+}
 
 
 //   getElement() {

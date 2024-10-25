@@ -14,17 +14,25 @@ const bodyContainer= document.querySelector('.board-app'); // Здесь мы с
 const formContainer = document.querySelector('.add-task');
 const taskBoardContainer = document.querySelector('.taskboard');
 
+
 const tasksModel = new TasksModel();
 const tasksBoardPresenter = new TasksBoardPresenter({
     boardContainer: taskBoardContainer,
     tasksModel,
    });
    
+const formAddTaskComponent = new FormAddTaskComponent ({
+    onClick: handleNewTaskButtonClick
+})
+
+function handleNewTaskButtonClick() {
+    tasksBoardPresenter.createTask();
+}
 
 
 
 render(new HeaderComponent(), bodyContainer, RenderPosition.AFTERBEGIN); // По сути мы говорим "Создай шапку и помести ее туда, где указан путь bodyContainer". Шапка опредлена в header-component.js
-render(new FormAddTaskComponent(), formContainer, RenderPosition.AFTERBEGIN);
+render(formAddTaskComponent, formContainer, RenderPosition.AFTERBEGIN);
 
 
 
