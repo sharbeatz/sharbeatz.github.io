@@ -5,6 +5,10 @@ import { render } from '../framework/render.js';
 import ClearButtonComponent from '../view/clear-button-component.js';
 import TasksModel from '../model/tasks-model.js';
 import { Status, StatusLabel } from '../const.js';
+import NoTasksComponent from '../view/no-tasks-component.js';
+
+
+
 
 export default class TasksBoardPresenter {
   #boardContainer;
@@ -25,22 +29,57 @@ export default class TasksBoardPresenter {
   getTasksByStatus(boardTasks, status) {
     return boardTasks.filter(task=> task.status === status);
    }
-   
-  #renderboard() {
-    render(this.#tasksBoardComponent, this.#boardContainer);
-  Object.values(Status).forEach(status => {
-    const tasksListComponent = new TasksListComponent({status: status, label: StatusLabel[status]});
-    render(tasksListComponent, this.#tasksBoardComponent.element);
 
-    const tasksForStatus = this.getTasksByStatus(this.#boardTasks,status);
-    tasksForStatus.forEach((task)=> {
-      render(new TaskComponent({task}), tasksListComponent.element);
+   #renderboard() {
+
+
+    render(this.#tasksBoardComponent, this.#boardContainer);
+    Object.values(Status).forEach(status=> {
+      const tasksListComponent = new TasksListComponent({status: status, label: StatusLabel[status]});
+      render (tasksListComponent, this.#tasksBoardComponent.element);
+
+      const tasksForStatus = this.getTasksByStatus(this.#boardTasks, status);
+      if (tasksForStatus.length == 0) {
+        render(new NoTasksComponent, tasksListComponent.element);
+        return;
+      }
+      tasksForStatus.forEach((task)=> {
+        render(new TaskComponent({task}), tasksListComponent.element);
+      }
+      );
+      if (status == Status.TRASH) {
+        render(new ClearButtonComponent, tasksListComponent.element)
+      }
     }
     )
-  });
-  
+    
+   }
+
+
+
+
+
+//   #renderboard() {
+//     render(this.#tasksBoardComponent, this.#boardContainer);
+
+//     Object.values(Status).forEach(status => {
+//     const tasksListComponent = new TasksListComponent({status: status, label: StatusLabel[status]});
+//     render(tasksListComponent, this.#tasksBoardComponent.element);
+
+//     const tasksForStatus = this.getTasksByStatus(this.#boardTasks,status);
+//     tasksForStatus.forEach((task)=> {
+//       render(new TaskComponent({task}), tasksListComponent.element);
+//     }
+//     )
+//   });
+// }
+
+
 }
-}
+
+
+
+
 
 
 

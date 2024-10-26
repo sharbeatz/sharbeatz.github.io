@@ -7,7 +7,7 @@ function createTaskListTemplate({ status, label }) {
   return (
     `
     <li class="tasks">
-        <h4 class="title-tasks ${status}">${StatusLabel[status]}</h4>
+        <h4 class="title-tasks ${status}">${label}</h4>
         <ul class="tasks ${status}">
         </ul>
     </li>
