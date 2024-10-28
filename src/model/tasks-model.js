@@ -19,7 +19,8 @@ export default class TasksModel {
     title,
     status: "backlog",
     id: generateId(),
-  }
+  };
+
   this.#boardtasks.push(newTask);
   this._notifyObservers();
   return newTask;

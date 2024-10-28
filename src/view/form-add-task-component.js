@@ -24,11 +24,12 @@ export default class FormAddTaskComponent extends AbstractComponent {
     super();  // <--- Необходимо вызывать перед использованием 'this'
     this.#handleClick = onClick;
     this.element.addEventListener('submit', this.#clickHandler);
-
     }
   get template() {
+    console.log("123");
     return createFormAddTaskComponentTemplate();
   }
+
 
 #clickHandler = (evt) => {
     evt.preventDefault();

@@ -7,9 +7,6 @@ import TasksModel from '../model/tasks-model.js';
 import { Status, StatusLabel } from '../const.js';
 import NoTasksComponent from '../view/no-tasks-component.js';
 
-
-
-
 export default class TasksBoardPresenter {
   #boardContainer;
   #tasksModel;
@@ -19,19 +16,46 @@ export default class TasksBoardPresenter {
   constructor({boardContainer, tasksModel}){
     this.#boardContainer = boardContainer;
     this.#tasksModel = tasksModel;
+    this.#tasksModel.addObserver(this.#handleModelChange.bind(this));
   }
+
+  #handleModelChange() {
+    this.#clearBoard();
+    this.#renderBoard();
+  }
+
+  #clearBoard() {
+    this.#tasksBoardComponent.element.innerHTML = '';
+    
+  }
+
 
   init() {
     this.#boardTasks = [...this.#tasksModel.tasks]
-    this.#renderboard();
+    this.#renderBoard();
   }
 
   getTasksByStatus(boardTasks, status) {
     return boardTasks.filter(task=> task.status === status);
    }
 
-   #renderboard() {
+   #renderClearButton(container) {
+    render(new ClearButtonComponent, container);
+   }
 
+   createTask() {
+    const taskTitle = document.querySelector("#add-task").value.trim();
+    console.log(`новая задача ${taskTitle})`);
+    if (!taskTitle) {
+      return
+    }
+
+    const newTask = this.#tasksModel.addTask(taskTitle);
+    document.querySelector("#add-task").value = '';
+
+   }
+
+   #renderBoard() {
 
     render(this.#tasksBoardComponent, this.#boardContainer);
     Object.values(Status).forEach(status=> {
@@ -48,7 +72,7 @@ export default class TasksBoardPresenter {
       }
       );
       if (status == Status.TRASH) {
-        render(new ClearButtonComponent, tasksListComponent.element)
+        this.#renderClearButton(tasksListComponent.element);
       }
     }
     )
