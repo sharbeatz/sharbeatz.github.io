@@ -11,9 +11,21 @@ function createClearButtonComponentTemplate() {
 
 
 export default class ClearButtonComponent extends AbstractComponent {
+  #handleClick;
+  constructor({onClick}) {
+    super();
+    this.#handleClick = onClick;
+    this.element.addEventListenner("click", this.#clickHandler)
+  }
   get template() {
     return createClearButtonComponentTemplate();
   }
+  #clickHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleClick();
+  }
+
+}
 
   // #handleClick = null;
   // constructor ({onClick}) {
@@ -25,6 +37,6 @@ export default class ClearButtonComponent extends AbstractComponent {
   //     evt.preventDefault();
   //     this.#handleClick();
   // }
-}
+
 
 

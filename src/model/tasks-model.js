@@ -15,6 +15,7 @@ export default class TasksModel {
  }
 
  addTask(title) {
+  console.log()
   const newTask = {
     title,
     status: "backlog",

@@ -20,13 +20,13 @@ export default class TasksBoardPresenter {
   }
 
   #handleModelChange() {
+    this.#boardTasks = [...this.#tasksModel.tasks]; 
     this.#clearBoard();
-    this.#renderBoard();
+    this.init();
   }
 
   #clearBoard() {
     this.#tasksBoardComponent.element.innerHTML = '';
-    
   }
 
 
@@ -40,19 +40,22 @@ export default class TasksBoardPresenter {
    }
 
    #renderClearButton(container) {
-    render(new ClearButtonComponent, container);
+    render(new ClearButtonComponent(), container);
    }
 
    createTask() {
     const taskTitle = document.querySelector("#add-task").value.trim();
-    console.log(`новая задача ${taskTitle})`);
     if (!taskTitle) {
-      return
+      return;
     }
-
     const newTask = this.#tasksModel.addTask(taskTitle);
     document.querySelector("#add-task").value = '';
+   }
 
+   DeleteTasksFromTrash() {
+    if (this.#tasksModel.status == "trash") {
+      this.#tasksModel.tas
+    }
    }
 
    #renderBoard() {
