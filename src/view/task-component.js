@@ -14,25 +14,25 @@ export default class TaskComponent extends AbstractComponent {
   constructor({ task }) {
     super(); // Необходимо вызывать super() для наследования от AbstractComponent
     this.task = task;
+    this.#afterCreateElement();
   }
 
   get template() { // Используем геттер вместо метода getTemplate
     return createTaskTemplate(this.task);
   }
 
-//   getElement() {
-//     if (!this.element) {
-//       this.element = createElement(this.getTemplate());
-//     }
+  #afterCreateElement() {
+    this.#makeTaskDraggable();
+  }
 
+  #makeTaskDraggable() {
+    this.element.setAttribute(`draggable`, true);
 
-//     return this.element;
-//   }
+    this.element.addEventListener('dragstart', (event) => {
+      event.dataTransfer.setData('text/plain', this.task.id);
+    });
+  }
 
-
-//   removeElement() {
-//     this.element = null;
-//   }
 }
 
 

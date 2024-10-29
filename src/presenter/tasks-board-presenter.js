@@ -64,7 +64,7 @@ export default class TasksBoardPresenter {
 
     render(this.#tasksBoardComponent, this.#boardContainer);
     Object.values(Status).forEach(status=> {
-      const tasksListComponent = new TasksListComponent({status: status, label: StatusLabel[status]});
+      const tasksListComponent = new TasksListComponent({status: status, label: StatusLabel[status], onTaskDrop: this.#handleTaskDrop.bind(this)});
       render (tasksListComponent, this.#tasksBoardComponent.element);
 
       const tasksForStatus = this.getTasksByStatus(this.#boardTasks, status);
@@ -82,6 +82,10 @@ export default class TasksBoardPresenter {
     }
     )
     
+   }
+
+   #handleTaskDrop(taskId, newStatus) {
+    this.#tasksModel.updateTaskStatus(taskId, newStatus);
    }
 
 
