@@ -2,7 +2,7 @@ import HeaderComponent from './view/header-component.js';
 import FormAddTaskComponent from './view/form-add-task-component.js';
 import TasksBoardPresenter from './presenter/tasks-board-presenter.js';
 import TasksModel from './model/tasks-model.js';
-
+import ClearButtonComponent from './view/clear-button-component.js';
 import TaskBoardComponent from './view/task-board-component.js';
 import TaskComponent from './view/task-component.js';
 
@@ -17,7 +17,7 @@ const taskBoardContainer = document.querySelector('.taskboard');
 
 const tasksModel = new TasksModel();
 const tasksBoardPresenter = new TasksBoardPresenter({
-    boardContainer: taskBoardContainer,
+    boardContainer: taskBoardContainer, 
     tasksModel,
    });
    
@@ -29,7 +29,14 @@ function handleNewTaskButtonClick() {
     tasksBoardPresenter.createTask();
 }
 
+const clearButtonComponent = new ClearButtonComponent({
+    onClick: handleClearButtonClick 
+});
 
+function handleClearButtonClick() {
+    console.log('фукнция'); // Проверка, вызывается ли функция
+    tasksBoardPresenter.DeleteTasksFromTrash();
+}
 
 render(new HeaderComponent(), bodyContainer, RenderPosition.AFTERBEGIN); // По сути мы говорим "Создай шапку и помести ее туда, где указан путь bodyContainer". Шапка опредлена в header-component.js
 render(formAddTaskComponent, formContainer, RenderPosition.AFTERBEGIN);

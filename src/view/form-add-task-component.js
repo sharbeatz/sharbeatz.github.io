@@ -26,7 +26,6 @@ export default class FormAddTaskComponent extends AbstractComponent {
     this.element.addEventListener('submit', this.#clickHandler);
     }
   get template() {
-    console.log("123");
     return createFormAddTaskComponentTemplate();
   }
 

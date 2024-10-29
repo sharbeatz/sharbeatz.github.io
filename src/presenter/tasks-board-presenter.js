@@ -53,10 +53,12 @@ export default class TasksBoardPresenter {
    }
 
    DeleteTasksFromTrash() {
-    if (this.#tasksModel.status == "trash") {
-      this.#tasksModel.tas
-    }
-   }
+    // Фильтруем задачи и оставляем только те, у которых статус не "trash"
+    
+    this.#tasksModel = this.#tasksModel.filter(task => task.status !== "trash");
+    this._notifyObservers();
+
+}
 
    #renderBoard() {
 
