@@ -39,13 +39,36 @@ export default class TasksModel {
  }
 
  
- updateTaskStatus(taskId, newStatus) {
-  const task = this.#boardtasks.find(task=> task.id === taskId);
-  if(task) {
-    task.status = newStatus;
-    this._notifyObservers();
+//  updateTaskStatus(taskId, newStatus) {
+//   const task = this.#boardtasks.find(task=> task.id === taskId);
+//   if(task) {
+//     task.status = newStatus;
+//     this._notifyObservers();
+//   }
+//  }
+
+
+updateTaskStatus(taskId, newStatus, position) {
+  const taskIndex = this.#boardtasks.findIndex(task => task.id === taskId);
+  if (taskIndex === -1) return;
+
+  // Удаляем задачу из текущего списка
+  const [task] = this.#boardtasks.splice(taskIndex, 1);
+  task.status = newStatus;
+
+  // Если позиция указана, находим её индекс и вставляем перед ней
+  if (position) {
+    console.log("position")
+    const insertIndex = this.#boardtasks.findIndex(task => task.id === position);
+    this.#boardtasks.splice(insertIndex, 0, task);
+  } else {
+    // Если позиция не указана, добавляем в конец нового статуса
+    this.#boardtasks.push(task);
+
   }
- }
+
+  this._notifyObservers();
+}
 
 
 }

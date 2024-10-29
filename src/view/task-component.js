@@ -23,6 +23,8 @@ export default class TaskComponent extends AbstractComponent {
 
   #afterCreateElement() {
     this.#makeTaskDraggable();
+        // Добавляем data-task-id, чтобы получить доступ к id задачи при drag and drop
+        this.element.setAttribute('data-task-id', this.task.id);
   }
 
   #makeTaskDraggable() {
@@ -30,7 +32,7 @@ export default class TaskComponent extends AbstractComponent {
 
     this.element.addEventListener('dragstart', (event) => {
       event.dataTransfer.setData('text/plain', this.task.id);
-    });
+    }); 
   }
 
 }
