@@ -61,8 +61,10 @@ updateTaskStatus(taskId, newStatus, position) {
     console.log("position")
     const insertIndex = this.#boardtasks.findIndex(task => task.id === position);
     this.#boardtasks.splice(insertIndex, 0, task);
-  } else {
+  }
+  else {
     // Если позиция не указана, добавляем в конец нового статуса
+    console.log("1243");
     this.#boardtasks.push(task);
 
   }

@@ -71,7 +71,7 @@ export default class TasksListComponent extends AbstractComponent {
       // Получаем ID задачи, перед которой нужно вставить
       console.log(`${draggedOverTask}`)
       const position = draggedOverTask ? draggedOverTask.dataset.taskId : null;
-      console.log(`${draggedOverTask.dataset.taskId}`)
+
       onTaskDrop(taskId, this.status, position);
     });
   }
