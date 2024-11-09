@@ -45,6 +45,7 @@ export default class TasksBoardPresenter {
     const clearButtonComponent = new ClearButtonComponent()
     render(clearButtonComponent, container);
     clearButtonComponent.clearTasks(this.DeleteTasksFromTrash)
+
    }
 
    createTask() {
@@ -57,10 +58,8 @@ export default class TasksBoardPresenter {
    }
 
    DeleteTasksFromTrash() {
-    // Фильтруем задачи и оставляем только те, у которых статус не "trash"
-    if (this.#tasksModel.tasks )
-    console.log("clear")
-    
+    this.#tasksModel.clearTasksForTrash();
+    console.log(this.#tasksModel.clearTasksForTrash())
 }
 
    #renderBoard() {

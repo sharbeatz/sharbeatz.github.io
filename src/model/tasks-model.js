@@ -9,12 +9,15 @@ export default class TasksModel {
  #observers = [];
  
  get tasks() {
+  console.log(this.#boardtasks[1].status)
    return this.#boardtasks;
  }
 
  getTasksByStatus(status) {
   return this.#boardtasks.filter(task=> task.status === status);
  }
+
+
 
  addTask(title) {
   const newTask = {
@@ -26,6 +29,11 @@ export default class TasksModel {
   this.#boardtasks.push(newTask);
   this._notifyObservers();
   return newTask;
+ }
+
+ clearTaskForTrash() {
+  const delTasks = this.#boardtasks.filter(task=> task.status === 'trash')
+  return delTasks;
  }
 
  addObserver(observer) {
