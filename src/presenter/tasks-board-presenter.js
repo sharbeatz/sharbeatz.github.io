@@ -44,8 +44,8 @@ export default class TasksBoardPresenter {
    #renderClearButton(container) {
     const clearButtonComponent = new ClearButtonComponent()
     render(clearButtonComponent, container);
-    clearButtonComponent.clearTasks(this.DeleteTasksFromTrash)
-
+    // clearButtonComponent.clearTasks(this.DeleteTasksFromTrash)
+    clearButtonComponent.clearTasks(this.DeleteTasksFromTrash.bind(this)); // Привязываем контекст
    }
 
    createTask() {
@@ -59,7 +59,7 @@ export default class TasksBoardPresenter {
 
    DeleteTasksFromTrash() {
     this.#tasksModel.clearTasksForTrash();
-    console.log(this.#tasksModel.clearTasksForTrash())
+    console.log("Задачи в корзине очищены"); // Проверка
 }
 
    #renderBoard() {

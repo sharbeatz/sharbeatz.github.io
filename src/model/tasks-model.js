@@ -9,7 +9,6 @@ export default class TasksModel {
  #observers = [];
  
  get tasks() {
-  console.log(this.#boardtasks[1].status)
    return this.#boardtasks;
  }
 
@@ -27,13 +26,15 @@ export default class TasksModel {
   };
 
   this.#boardtasks.push(newTask);
-  this._notifyObservers();
+  this._notifyObservers(); // оповещаем об изменениях
   return newTask;
  }
 
- clearTaskForTrash() {
-  const delTasks = this.#boardtasks.filter(task=> task.status === 'trash')
-  return delTasks;
+ clearTasksForTrash() {
+  const delTasks = this.#boardtasks.filter(task=> task.status === 'trash');
+  this.#boardtasks = this.#boardtasks.filter(task=> task.status !=='trash');
+  this._notifyObservers(); // оповещаем об изменениях
+  return this.#boardtasks;
  }
 
  addObserver(observer) {
