@@ -3,6 +3,8 @@ import { generateId } from '../utils.js';
 
 export default class TasksModel {
  #boardtasks = tasks; 
+ 
+ 
 
  #observers = [];
  
@@ -15,7 +17,6 @@ export default class TasksModel {
  }
 
  addTask(title) {
-  console.log()
   const newTask = {
     title,
     status: "backlog",

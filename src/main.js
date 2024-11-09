@@ -29,14 +29,15 @@ function handleNewTaskButtonClick() {
     tasksBoardPresenter.createTask();
 }
 
-const clearButtonComponent = new ClearButtonComponent({
-    onClick: handleClearButtonClick 
-});
+// const clearButtonComponent = new ClearButtonComponent();
+// clearButtonComponent.clearTasks(handleClearButtonClick)
 
-function handleClearButtonClick() {
-    console.log('фукнция'); // Проверка, вызывается ли функция
-    tasksBoardPresenter.DeleteTasksFromTrash();
-}
+// function handleClearButtonClick() {
+//     tasksBoardPresenter.DeleteTasksFromTrash();  
+//     console.log("Проверка") // не вызывается
+// }
+
+
 
 render(new HeaderComponent(), bodyContainer, RenderPosition.AFTERBEGIN); // По сути мы говорим "Создай шапку и помести ее туда, где указан путь bodyContainer". Шапка опредлена в header-component.js
 render(formAddTaskComponent, formContainer, RenderPosition.AFTERBEGIN);
@@ -56,3 +57,12 @@ render(formAddTaskComponent, formContainer, RenderPosition.AFTERBEGIN);
 // }
 
 tasksBoardPresenter.init();
+
+
+
+
+
+
+
+ 
+

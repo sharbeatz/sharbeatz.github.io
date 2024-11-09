@@ -20,7 +20,7 @@ export default class TasksBoardPresenter {
   }
 
   #handleModelChange() {
-    this.#boardTasks = [...this.#tasksModel.tasks]; 
+    // this.#boardTasks = [...this.#tasksModel.tasks]; 
     this.#clearBoard();
     this.init();
   }
@@ -32,15 +32,19 @@ export default class TasksBoardPresenter {
 
   init() {
     this.#boardTasks = [...this.#tasksModel.tasks]
+    
     this.#renderBoard();
+    console.log(this.#tasksModel.tasks)
   }
 
   getTasksByStatus(boardTasks, status) {
     return boardTasks.filter(task=> task.status === status);
    }
-
+ 
    #renderClearButton(container) {
-    render(new ClearButtonComponent(), container);
+    const clearButtonComponent = new ClearButtonComponent()
+    render(clearButtonComponent, container);
+    clearButtonComponent.clearTasks(this.DeleteTasksFromTrash)
    }
 
    createTask() {
@@ -54,14 +58,12 @@ export default class TasksBoardPresenter {
 
    DeleteTasksFromTrash() {
     // Фильтруем задачи и оставляем только те, у которых статус не "trash"
+    if (this.#tasksModel.tasks )
+    console.log("clear")
     
-    this.#tasksModel = this.#tasksModel.filter(task => task.status !== "trash");
-    this._notifyObservers();
-
 }
 
    #renderBoard() {
-
     render(this.#tasksBoardComponent, this.#boardContainer);
     Object.values(Status).forEach(status=> {
       const tasksListComponent = new TasksListComponent({status: status, label: StatusLabel[status], onTaskDrop: this.#handleTaskDrop.bind(this)});
