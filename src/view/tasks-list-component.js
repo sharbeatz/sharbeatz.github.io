@@ -9,6 +9,7 @@ function createTaskListTemplate({ status, label }) {
     <li class="tasks">
         <h4 class="title-tasks ${status}">${label}</h4>
         <ul class="tasks ${status}">
+        
         </ul>
     </li>
     `
@@ -43,7 +44,7 @@ function createTaskListTemplate({ status, label }) {
 //   }
 
 export default class TasksListComponent extends AbstractComponent {
-  constructor({ status, label, onTaskDrop }) {
+  constructor({ status, label, onTaskDrop}) {
     super();
     this.status = status;
     this.label = label;

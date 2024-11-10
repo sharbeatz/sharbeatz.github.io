@@ -9,17 +9,25 @@ import TaskComponent from './view/task-component.js';
 
 
 import {render, RenderPosition} from './framework/render.js';
+import TaskBoardPresenter from './presenter/tasks-board-presenter.js';
 
+const taskBoardContainer = document.querySelector('.taskboard');
 const bodyContainer= document.querySelector('.board-app'); // Здесь мы создаем константу и кладем туда расположение "где у нас находится класс в HTML" в данном случае <..class="board-app">
 const formContainer = document.querySelector('.add-task');
-const taskBoardContainer = document.querySelector('.taskboard');
+
+console.log(formContainer)
 
 
 const tasksModel = new TasksModel();
-const tasksBoardPresenter = new TasksBoardPresenter({
-    boardContainer: taskBoardContainer, 
-    tasksModel,
-   });
+const tasksBoardPresenter = new TaskBoardPresenter({
+    boardContainer: taskBoardContainer,
+    tasksModel
+});
+
+
+
+
+
    
 const formAddTaskComponent = new FormAddTaskComponent ({
     onClick: handleNewTaskButtonClick

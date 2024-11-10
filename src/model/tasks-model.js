@@ -24,7 +24,7 @@ export default class TasksModel {
     status: "backlog",
     id: generateId(),
   };
-
+  
   this.#boardtasks.push(newTask);
   this._notifyObservers(); // оповещаем об изменениях
   return newTask;
