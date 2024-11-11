@@ -30,7 +30,7 @@ export default class ClearButtonComponent extends AbstractComponent {
   #clickHandler() {
     if (this.#handleClick) {
         this.#handleClick(); 
-        console.log("Проверка"); // Должно сработать при вызове
+     
     }
 }
 

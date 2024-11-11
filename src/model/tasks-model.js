@@ -1,23 +1,46 @@
-import { tasks } from '../mock/task.js';
+// import { tasks } from '../mock/task.js';
 import { generateId } from '../utils.js';
+import Observable from '../framework/observable.js';
 
-export default class TasksModel {
- #boardtasks = tasks; 
- 
+
+export default class TasksModel extends Observable {
+//  #boardtasks = tasks; 
+ #tasksApiService = null;
+ #boardtasks = [];
+
+
+ constructor({tasksApiService}) {
+  super();
+   this.#tasksApiService = tasksApiService;
+   this.#tasksApiService.tasks.then((tasks) => {
+     console.log(tasks);
+   });
+ }
+
  
 
- #observers = [];
+//  #observers = [];
  
  get tasks() {
    return this.#boardtasks;
  }
 
+ async init() {
+  try {
+    const tasks = await this.#tasksApiService.tasks;
+    this.#boardtasks = tasks;
+  } 
+  catch(err) {
+    this.#boardtasks = [];
+  }
+  this._notify(UpdateType.INIT);
+}
+
+
  getTasksByStatus(status) {
   return this.#boardtasks.filter(task=> task.status === status);
  }
-
-
-
+ 
  addTask(title) {
   const newTask = {
     title,
@@ -26,37 +49,30 @@ export default class TasksModel {
   };
   
   this.#boardtasks.push(newTask);
-  this._notifyObservers(); // оповещаем об изменениях
+  this._notify(); // оповещаем об изменениях
   return newTask;
  }
 
  clearTasksForTrash() {
   const delTasks = this.#boardtasks.filter(task=> task.status === 'trash');
   this.#boardtasks = this.#boardtasks.filter(task=> task.status !=='trash');
-  this._notifyObservers(); // оповещаем об изменениях
+  this._notify(); // оповещаем об изменениях
   return this.#boardtasks;
  }
 
- addObserver(observer) {
-  this.#observers.push(observer);
- }
-
- removeObserver(observer) {
-  this.#observers = this.#observers.filter((obs) => obs!== observer); 
- }
- _notifyObservers() {
-  this.#observers.forEach((observer) => observer());
- }
-
- 
-//  updateTaskStatus(taskId, newStatus) {
-//   const task = this.#boardtasks.find(task=> task.id === taskId);
-//   if(task) {
-//     task.status = newStatus;
-//     this._notifyObservers();
-//   }
+ // ПАТЕРН НАБЛЮДАТЕЛЬ ПЕРЕНЕСЕН В observable.js
+//  addObserver(observer) {
+//   this.#observers.push(observer);
 //  }
 
+//  removeObserver(observer) {
+//   this.#observers = this.#observers.filter((obs) => obs!== observer); 
+//  }
+//  _notifyObservers() {
+//   this.#observers.forEach((observer) => observer());
+//  }
+
+ 
 
 updateTaskStatus(taskId, newStatus, position) {
   const taskIndex = this.#boardtasks.findIndex(task => task.id === taskId);
@@ -78,8 +94,7 @@ updateTaskStatus(taskId, newStatus, position) {
     this.#boardtasks.push(task);
 
   }
-
-  this._notifyObservers();
+  this._notify();
 }
 
 

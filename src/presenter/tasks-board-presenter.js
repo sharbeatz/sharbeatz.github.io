@@ -6,6 +6,7 @@ import ClearButtonComponent from '../view/clear-button-component.js';
 import TasksModel from '../model/tasks-model.js';
 import { Status, StatusLabel } from '../const.js';
 import NoTasksComponent from '../view/no-tasks-component.js';
+import Observable from '../framework/observable.js';
 
 export default class TasksBoardPresenter {
   #boardContainer;
@@ -34,7 +35,7 @@ export default class TasksBoardPresenter {
     this.#boardTasks = [...this.#tasksModel.tasks]
     
     this.#renderBoard();
-    console.log(this.#tasksModel.tasks)
+    
   }
 
   getTasksByStatus(boardTasks, status) {

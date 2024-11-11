@@ -5,12 +5,15 @@ import TasksModel from './model/tasks-model.js';
 import ClearButtonComponent from './view/clear-button-component.js';
 import TaskBoardComponent from './view/task-board-component.js';
 import TaskComponent from './view/task-component.js';
-
+import TasksApiService from './tasks-api-service.js';
 
 
 import {render, RenderPosition} from './framework/render.js';
 import TaskBoardPresenter from './presenter/tasks-board-presenter.js';
 
+
+
+const END_POINT = 'https://672215242108960b9cc2d547.mockapi.io';
 const taskBoardContainer = document.querySelector('.taskboard');
 const bodyContainer= document.querySelector('.board-app'); // Здесь мы создаем константу и кладем туда расположение "где у нас находится класс в HTML" в данном случае <..class="board-app">
 const formContainer = document.querySelector('.add-task');
@@ -18,7 +21,8 @@ const formContainer = document.querySelector('.add-task');
 console.log(formContainer)
 
 
-const tasksModel = new TasksModel();
+const tasksModel = new TasksModel({tasksApiService: new TasksApiService(END_POINT)});
+
 const tasksBoardPresenter = new TaskBoardPresenter({
     boardContainer: taskBoardContainer,
     tasksModel
