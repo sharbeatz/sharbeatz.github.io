@@ -1,7 +1,7 @@
 // import { tasks } from '../mock/task.js';
 import { generateId } from '../utils.js';
 import Observable from '../framework/observable.js';
-import { UpdateType } from '../const.js';
+import { UpdateType, UserAction } from '../const.js';
 
 export default class TasksModel extends Observable {
 //  #boardtasks = tasks; 
@@ -41,16 +41,22 @@ export default class TasksModel extends Observable {
   return this.#boardtasks.filter(task=> task.status === status);
  }
  
- addTask(title) {
+ async addTask(title) {
   const newTask = {
     title,
     status: "backlog",
     id: generateId(),
   };
-  
-  this.#boardtasks.push(newTask);
-  this._notify(); // оповещаем об изменениях
-  return newTask;
+  try{
+    const createdTask = await this.#tasksApiService.addTask(newTask);
+    this.#boardtasks.push(createdTask);
+    this._notify(UserAction.ADD_TASK, createdTask);
+    return createdTask;
+  }catch (err) {
+    console.log("Ошибка при добавлении задачи на сервере:", err);
+    throw err;
+  }
+ 
  }
 
  clearTasksForTrash() {
@@ -59,6 +65,10 @@ export default class TasksModel extends Observable {
   this._notify(); // оповещаем об изменениях
   return this.#boardtasks;
  }
+
+ hasBasketTasks() {
+  return this.tasks.some(task => task.status === 'trash');
+}
 
  // ПАТЕРН НАБЛЮДАТЕЛЬ ПЕРЕНЕСЕН В observable.js
 //  addObserver(observer) {

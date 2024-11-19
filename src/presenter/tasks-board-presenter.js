@@ -4,7 +4,7 @@ import TaskBoardComponent from '../view/task-board-component.js';
 import { render } from '../framework/render.js';
 import ClearButtonComponent from '../view/clear-button-component.js';
 import TasksModel from '../model/tasks-model.js';
-import { Status, StatusLabel } from '../const.js';
+import { Status, StatusLabel, UserAction } from '../const.js';
 import NoTasksComponent from '../view/no-tasks-component.js';
 import Observable from '../framework/observable.js';
 
@@ -20,10 +20,22 @@ export default class TasksBoardPresenter {
     this.#tasksModel.addObserver(this.#handleModelChange.bind(this));
   }
 
-  #handleModelChange() {
-    this.#boardTasks = [...this.#tasksModel.tasks]; 
-    this.#clearBoard();
-    this.init();
+  #handleModelChange(event) {
+    // this.#boardTasks = [...this.#tasksModel.tasks]; 
+    // this.#clearBoard();
+    // this.init();
+
+    switch (event) {
+      case UserAction.ADD_TASK:
+        case UserAction.UPDATE_TASK:
+          case UserAction.DELETE_TASK:
+            this.#clearBoard();
+            this.#renderBoard();
+            if (this.#renderClearButton) {
+              this.#renderClearButton.toggleDisabled(!this.#tasksModel.hasBasketTasks());
+            }
+            break;
+    }
   }
 
   #clearBoard() {
@@ -49,13 +61,19 @@ export default class TasksBoardPresenter {
     clearButtonComponent.clearTasks(this.DeleteTasksFromTrash.bind(this)); // Привязываем контекст
    }
 
-   createTask() {
-    const taskTitle = document.querySelector("#add-task").value.trim();
+   async createTask() {
+    const taskTitle = document.querySelector("#add-task").value;
     if (!taskTitle) {
       return;
     }
-    const newTask = this.#tasksModel.addTask(taskTitle);
-    document.querySelector("#add-task").value = '';
+
+    try {
+      await this.#tasksModel.addTask(taskTitle);
+      document.querySelector('#add-task').value = '';
+      this.#renderBoard();
+    }catch (err) {
+      console.error("Ошибка при создании задачи:", err);
+    }
    }
 
    DeleteTasksFromTrash() {

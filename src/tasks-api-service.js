@@ -15,11 +15,15 @@ export default class TasksApiService extends ApiService {
      .then(ApiService.parseResponse);
  }
 
-//  async addTask(task) {
-//   const responce = await this._load({
-
-//   })
-//  }
+ async addTask(task) {
+  const responce = await this._load({
+        url:"tasks",
+        method:Method.POST,
+        body: JSON.stringify(task),
+        headers: new Headers({"Content-Type": "application/json"}),
+  });
+  return ApiService.parseResponse(responce);
+ }
 
 
 }

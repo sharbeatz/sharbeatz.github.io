@@ -18,7 +18,7 @@ export default class ClearButtonComponent extends AbstractComponent {
   
   clearTasks (onClick) {
     this.#handleClick = onClick;
-    console.log("Элемент:", this.element); // Проверяем элемент
+    
     if (this.element) {
         this.element.addEventListener('click', this.#clickHandler.bind(this)); // Привязываем контекст
     } else {
@@ -33,6 +33,14 @@ export default class ClearButtonComponent extends AbstractComponent {
      
     }
 }
+
+
+toggleDisabled(isDisabled) {
+  this.element.disabled = isDisabled;
+}toggleDisabled(isDisabled) {
+  this.element.disabled = isDisabled;
+}
+
 
   get template() {
       return createClearButtonComponentTemplate();
