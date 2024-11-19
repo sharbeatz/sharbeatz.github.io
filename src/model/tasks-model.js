@@ -1,7 +1,7 @@
 // import { tasks } from '../mock/task.js';
 import { generateId } from '../utils.js';
 import Observable from '../framework/observable.js';
-
+import { UpdateType } from '../const.js';
 
 export default class TasksModel extends Observable {
 //  #boardtasks = tasks; 

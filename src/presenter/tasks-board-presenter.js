@@ -21,7 +21,7 @@ export default class TasksBoardPresenter {
   }
 
   #handleModelChange() {
-    // this.#boardTasks = [...this.#tasksModel.tasks]; 
+    this.#boardTasks = [...this.#tasksModel.tasks]; 
     this.#clearBoard();
     this.init();
   }
@@ -31,9 +31,9 @@ export default class TasksBoardPresenter {
   }
 
 
-  init() {
-    this.#boardTasks = [...this.#tasksModel.tasks]
-    
+  async init() {
+    this.#boardTasks = [...this.#tasksModel.tasks];
+    await this.#tasksModel.init();  
     this.#renderBoard();
     
   }
@@ -64,6 +64,7 @@ export default class TasksBoardPresenter {
 }
 
    #renderBoard() {
+ 
     render(this.#tasksBoardComponent, this.#boardContainer);
     Object.values(Status).forEach(status=> {
       const tasksListComponent = new TasksListComponent({status: status, label: StatusLabel[status], onTaskDrop: this.#handleTaskDrop.bind(this)});
