@@ -68,6 +68,8 @@ render(formAddTaskComponent, formContainer, RenderPosition.AFTERBEGIN);
 //     }
 // }
 
+
+
 tasksBoardPresenter.init();
 
 
