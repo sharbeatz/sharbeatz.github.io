@@ -7,6 +7,8 @@ import TasksModel from '../model/tasks-model.js';
 import { Status, StatusLabel, UserAction } from '../const.js';
 import NoTasksComponent from '../view/no-tasks-component.js';
 import Observable from '../framework/observable.js';
+import LoadingViewComponent from '../view/loading-view-component.js';
+import { UpdateType } from '../const.js'; 
 
 export default class TasksBoardPresenter {
   #boardContainer;
@@ -14,6 +16,8 @@ export default class TasksBoardPresenter {
   #boardTasks = [];
   #tasksBoardComponent = new TaskBoardComponent();
   #clearButtonComponent = null; // Свойство для хранения экземпляра кнопки
+  #loadingComponent = new LoadingViewComponent(); // Компонент загрузки
+  #isLoading = true; // Флаг для проверки состояния загрузки
 
  
   constructor({boardContainer, tasksModel}){
@@ -21,38 +25,63 @@ export default class TasksBoardPresenter {
     this.#tasksModel = tasksModel;
     this.#tasksModel.addObserver(this.#handleModelChange.bind(this));
   }
-
   #handleModelChange(event) {
-    // this.#boardTasks = [...this.#tasksModel.tasks]; 
-    // this.#clearBoard();
-    // this.init();
+    // Проверяем тип события и обрабатываем его соответственно
     switch (event) {
       case UserAction.ADD_TASK:
-        case UserAction.UPDATE_TASK:
-          case UserAction.DELETE_TASK:
-            this.#boardTasks = [...this.#tasksModel.tasks]; // Синхронизация задач
-            this.#clearBoard();
-            this.#renderBoard();
-            // if (this.#renderClearButton) {
-            //   this.#renderClearButton.toggleDisabled(!this.#tasksModel.hasBasketTasks());
-            // }
-            if (this.#clearButtonComponent) {
-              this.#clearButtonComponent.toggleDisabled(!this.#tasksModel.hasBasketTasks());
-            } 
-            break;
-            default:
-              console.warn(`Необработанный тип события: ${event}`);
+      case UserAction.UPDATE_TASK:
+      case UserAction.DELETE_TASK:
+        this.#boardTasks = [...this.#tasksModel.tasks]; // Синхронизация задач
+        this.#clearBoard();
+        this.#renderBoard();
+  
+        if (this.#clearButtonComponent) {
+          this.#clearButtonComponent.toggleDisabled(!this.#tasksModel.hasBasketTasks());
+        }
+        break;
+  
+      case UpdateType.INIT:
+        // Когда модель инициализируется, удаляем компонент загрузки и рендерим задачи
+        this.#clearBoard();
+        this.#renderBoard();
+        break;
+  
+      default:
+        console.warn('Необработанный тип события:', event);
+    }
+  }
+  
+
+  
+  #clearBoard() {
+    this.#tasksBoardComponent.element.innerHTML = '';
+    // Если был рендеринг компонента загрузки, удаляем его
+    if (this.#isLoading) {
+      this.#loadingComponent.element.remove();
+      this.#loadingComponent = null;
     }
   }
 
-  #clearBoard() {
-    this.#tasksBoardComponent.element.innerHTML = '';
-  }
-
   async init() {
-    await this.#tasksModel.init();
-    this.#boardTasks = [...this.#tasksModel.tasks];
-    this.#renderBoard();
+    console.log('Инициализация началась...');
+    render(this.#loadingComponent, this.#boardContainer);
+  
+    try {
+      console.log('Загрузка задач...');
+      await this.#tasksModel.init();
+      console.log('Задачи загружены:', this.#tasksModel.tasks);
+  
+      this.#boardTasks = [...this.#tasksModel.tasks];
+      this.#isLoading = false;
+  
+      console.log('Удаляем компонент загрузки...');
+      this.#clearBoard();
+      this.#renderBoard();
+    } catch (err) {
+      console.error('Ошибка загрузки задач:', err);
+      this.#isLoading = false;
+      this.#clearBoard();
+    }
   }
 
   getTasksByStatus(boardTasks, status) {
@@ -86,6 +115,8 @@ export default class TasksBoardPresenter {
     if (!taskTitle) {
       return;
     }
+
+    
   
     try {
       const newTask = await this.#tasksModel.addTask(taskTitle);

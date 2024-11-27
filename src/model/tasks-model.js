@@ -32,16 +32,17 @@ export default class TasksModel extends Observable {
 //   this._notify(UpdateType.INIT);
 // }
 
+// Обновленный метод init в TasksModel
 async init() {
   try {
     const tasks = await this.#tasksApiService.tasks;
     this.#boardtasks = tasks;
-    console.log("Задачи успешно загружены:", tasks);
+    this._notify(UpdateType.INIT); // Уведомляем, что загрузка завершена
   } catch (err) {
-    console.error("Ошибка при загрузке задач:", err);
-    this.#boardtasks = [];
+    console.log("Ошибка при загрузке задач:", err);
+    this.#boardtasks = []; // В случае ошибки можно оставить пустой список задач
+    this._notify(UpdateType.INIT); // Даже при ошибке уведомляем
   }
-  this._notify(UpdateType.INIT);
 }
 
 
