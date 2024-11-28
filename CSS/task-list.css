@@ -15,11 +15,11 @@
 }
 
 .title-tasks {
-    width: 100%;
+    flex: 1; 
     border-radius: 7px; 
     border: 1px solid #ccc;
     padding: 10px;
-    margin-right: 300px;
+    text-align: center; 
 }
 
 .title-tasks.backlog {

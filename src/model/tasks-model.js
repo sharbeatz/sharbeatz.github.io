@@ -45,10 +45,6 @@ async init() {
   }
 }
 
-
-
-
-
  getTasksByStatus(status) {
   return this.#boardtasks.filter(task=> task.status === status);
  }
@@ -125,7 +121,10 @@ async clearBasketTasks() {
 
 hasBasketTasks() {
   return this.#boardtasks.some(task => task.status === 'trash');
+  
 }
+
+
 
 
 

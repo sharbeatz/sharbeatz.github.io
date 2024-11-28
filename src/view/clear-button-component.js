@@ -24,22 +24,26 @@ export default class ClearButtonComponent extends AbstractComponent {
     } else {
         console.warn("Элемент не найден в DOM");
     }
-    
   }
 
   #clickHandler() {
     if (this.#handleClick) {
         this.#handleClick(); 
-     
-    }
+    } 
 }
-
+  
 
 toggleDisabled(isDisabled) {
-  this.element.disabled = isDisabled;
-}toggleDisabled(isDisabled) {
-  this.element.disabled = isDisabled;
+  const button = this.element.querySelector('button'); // Ищем кнопку внутри элемента
+  if (button) {
+    button.disabled = isDisabled; // Устанавливаем состояние disabled
+  } else {
+    console.warn('Кнопка не найдена');
+  }
 }
+// toggleDisabled(isDisabled) {
+//   this.element.disabled = isDisabled;
+// }
 
 
   get template() {

@@ -1,0 +1,13 @@
+.no-tasks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    background-color: #f9f9f9;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #888;
+    text-align: center;
+}
