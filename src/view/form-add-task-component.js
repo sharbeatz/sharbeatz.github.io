@@ -6,10 +6,10 @@ function createFormAddTaskComponentTemplate() {
         `<form class="add-task__form" aria-label="Форма добавления задачи">
             <section class="new-task">
                 <div class="container">   
-                    <label>Новая задача</label>
+                    <label class = "new-task-label">Новая задача</label>
                     <div class="add-task">
                         <input type="text" id="add-task" placeholder="Название задачи...">     
-                        <button type = "submit">+ Добавить</button>
+                        <button type = "submit">Добавить</button>
                     </div>      
                 </div>    
             </section>

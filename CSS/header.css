@@ -5,5 +5,6 @@
     padding-left: 43px;
     padding-bottom: 5px;
     color: white;
-    background-color: #85C6ED
+    background-color: #85C6ED;
+    box-shadow: 2px 2px 5px rgba(1, 0, 0, 0.1);
 }

@@ -1,18 +1,52 @@
+.add-task {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px; 
+}
+
+.add-task input {
+    width: 250px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.add-task input:focus {
+    border-color: #0077ff;
+    box-shadow: 0 0 5px rgba(0, 119, 255, 0.5);
+}
+
 .add-task button {
     color: whitesmoke;
     background-color: #0077ff;
     border-radius: 7px;
     border: 2px solid #ccc;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .add-task button:hover {
     color: black;
     background-color: whitesmoke;
-    box-shadow: 0 1px 3px rgba(1,0,0,0.1);
+    box-shadow: 0 1px 3px rgba(1, 0, 0, 0.1);
 }
 
 .add-task button:active {
     color: #0077ff;
+}
+
+.new-task-label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
 }
 
 .new-task { 
@@ -20,13 +54,10 @@
     border: 1px solid #ccc;
     width: 380px;
     border-radius: 7px; 
-    padding: 30px;
-    margin: 10px;
-    box-shadow: 0 1px 3px rgba(1,0,0,0.1);
-    margin-right: 1450px;
-    margin-left: 35px;
-    background-color:#fff;
-    margin-top: 30px;
+    padding: 20px;
+    margin: 30px 35px 10px;
+    box-shadow: 5px 5px 3px rgba(1, 0, 0, 0.1);
+    background-color: #fff;
     font-family: "Montserrat", sans-serif;   
     font-size: 18px;    
     font-weight: 600; 

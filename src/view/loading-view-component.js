@@ -2,8 +2,11 @@ import { AbstractComponent } from "./abstract-component.js";
 
 function createNoTaskTemplate() {
     return (
-        `<p class="loading">Loading tasks...
-        </p>
+        `
+                <div class="loading">
+            <span class="loading__spinner"></span>
+            Загрузка задач
+        </div>
 `
     );
 }

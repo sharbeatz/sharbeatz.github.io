@@ -15,6 +15,7 @@
 }
 
 .title-tasks {
+    box-shadow: 5px 5px 10px rgba(1, 0, 0, 0.1);
     flex: 1; 
     border-radius: 7px; 
     border: 1px solid #ccc;
