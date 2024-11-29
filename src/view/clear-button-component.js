@@ -1,4 +1,4 @@
-import {createElement} from '../framework/render.js';
+
 import { AbstractComponent } from './abstract-component.js';
 
 function createClearButtonComponentTemplate() {
@@ -41,9 +41,6 @@ toggleDisabled(isDisabled) {
     console.warn('Кнопка не найдена');
   }
 }
-// toggleDisabled(isDisabled) {
-//   this.element.disabled = isDisabled;
-// }
 
 
   get template() {
@@ -54,16 +51,7 @@ toggleDisabled(isDisabled) {
 }
 
 
-  // #handleClick = null;
-  // constructor ({onClick}) {
-  //   super();  // <--- Необходимо вызывать перед использованием 'this'
-  //   this.#handleClick = onClick;
-  //   this.element.addEventListener('submit', this.#clickHandler);
-  //   }
-  //   #clickHandler = (evt) => {
-  //     evt.preventDefault();
-  //     this.#handleClick();
-  // }
+
 
 
 

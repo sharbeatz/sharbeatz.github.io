@@ -49,23 +49,7 @@ async init() {
   return this.#boardtasks.filter(task=> task.status === status);
  }
  
-//  async addTask(title) {
-//   const newTask = {
-//     title,
-//     status: "backlog",
-//     id: generateId(),
-//   };
-//   try{
-//     const createdTask = await this.#tasksApiService.addTask(newTask);
-//     this.#boardtasks.push(createdTask);
-//     this._notify(UserAction.ADD_TASK, createdTask);
-//     return createdTask;
-//   }catch (err) {
-//     console.log("Ошибка при добавлении задачи на сервере:", err);
-//     throw err;
-//   }
- 
-//  }
+
 
 async addTask(title) {
   const newTask = {

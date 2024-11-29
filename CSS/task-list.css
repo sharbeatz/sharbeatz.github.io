@@ -20,13 +20,13 @@
     border: 1px solid #ccc;
     padding: 10px;
     text-align: center; 
+    display: flex;
 }
 
 .title-tasks.backlog {
     list-style-type: none;
     background-color: #808080;
     color: whitesmoke;
-    display: flex;
 }
 
 .title-tasks.in-progress {

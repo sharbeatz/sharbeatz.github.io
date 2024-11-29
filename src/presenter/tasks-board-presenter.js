@@ -61,22 +61,16 @@
     }
 
     async init() {
-      console.log('Инициализация началась...');
+ 
       render(this.#loadingComponent, this.#boardContainer);
-    
+
       try {
-        console.log('Загрузка задач...');
         await this.#tasksModel.init();
-        console.log('Задачи загружены:', this.#tasksModel.tasks);
-    
         this.#boardTasks = [...this.#tasksModel.tasks];
         this.#isLoading = false;
-    
-        console.log('Удаляем компонент загрузки...');
         this.#clearBoard();
         this.#renderBoard();
       } catch (err) {
-        console.error('Ошибка загрузки задач:', err);
         this.#isLoading = false;
         this.#clearBoard();
       }
@@ -156,9 +150,5 @@
           console.error('Ошибка при обновлении статуса задачи:', err);
       }
   }
-
-
-
-
 
   }

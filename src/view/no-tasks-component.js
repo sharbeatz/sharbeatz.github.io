@@ -4,9 +4,9 @@ import { AbstractComponent } from "./abstract-component.js";
 function createNoTasksComponentTemplate (task) {
     return (
     `
-    <div class="no-tasks">
-        <p>Перетащите карточку</p>
-    </div>
+
+        <li class="no-tasks">Перетащите карточку</li>
+
     `
     );
 }
