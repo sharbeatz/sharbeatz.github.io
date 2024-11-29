@@ -16,8 +16,6 @@ const taskBoardContainer = document.querySelector('.taskboard');
 const bodyContainer= document.querySelector('.board-app'); // Здесь мы создаем константу и кладем туда расположение "где у нас находится класс в HTML" в данном случае <..class="board-app">
 const formContainer = document.querySelector('.add-task');
 
-console.log(formContainer)
-
 const tasksModel = new TasksModel({tasksApiService: new TasksApiService(END_POINT)});
 
 const tasksBoardPresenter = new TaskBoardPresenter({
@@ -37,29 +35,3 @@ render(new HeaderComponent(), bodyContainer, RenderPosition.AFTERBEGIN); // По
 render(formAddTaskComponent, formContainer, RenderPosition.AFTERBEGIN);
 
 tasksBoardPresenter.init();
-
-
-
-// const clearButtonComponent = new ClearButtonComponent();
-// clearButtonComponent.clearTasks(handleClearButtonClick)
-
-// function handleClearButtonClick() {
-//     tasksBoardPresenter.DeleteTasksFromTrash();  
-//     console.log("Проверка") // не вызывается
-// }
-
-
-
-
- // for(let i = 0; i < 4; i++) {
-//     render(new TaskBoardComponent(), taskBoardContainer, RenderPosition.BEFOREEND);
-
-//     const currentTaskBoard = taskBoardContainer.lastElementChild;
-
-//     for (let j = 0; j < 4; j++) {
-//         const taskComponent = new TaskComponent();
-//         render(taskComponent, currentTaskBoard, RenderPosition.BEFOREEND);
-//     }
-// }
-
-

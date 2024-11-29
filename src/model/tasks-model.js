@@ -1,10 +1,9 @@
-// import { tasks } from '../mock/task.js';
 import { generateId } from '../utils.js';
 import Observable from '../framework/observable.js';
 import { UpdateType, UserAction } from '../const.js';
 
 export default class TasksModel extends Observable {
-//  #boardtasks = tasks; 
+
  #tasksApiService = null;
  #boardtasks = [];
 
@@ -12,27 +11,13 @@ export default class TasksModel extends Observable {
  constructor({tasksApiService}) {
   super();
    this.#tasksApiService = tasksApiService;
-  //  this.#tasksApiService.tasks.then((tasks) => {
-  //    console.log(tasks);
-  //  });
+
  }
 
  get tasks() {
    return this.#boardtasks;
  }
 
-//  async init() {
-//   try {
-//     const tasks = await this.#tasksApiService.tasks;
-//     this.#boardtasks = tasks;
-//   } 
-//   catch(err) {
-//     this.#boardtasks = [];
-//   }
-//   this._notify(UpdateType.INIT);
-// }
-
-// Обновленный метод init в TasksModel
 async init() {
   try {
     const tasks = await this.#tasksApiService.tasks;
@@ -49,8 +34,6 @@ async init() {
   return this.#boardtasks.filter(task=> task.status === status);
  }
  
-
-
 async addTask(title) {
   const newTask = {
     title,
@@ -66,23 +49,6 @@ async addTask(title) {
     throw err;
   }
 }
-
-
-
-
-
-
-//  clearTasksForTrash() {
-//   const delTasks = this.#boardtasks.filter(task=> task.status === 'trash');
-//   this.#boardtasks = this.#boardtasks.filter(task=> task.status !=='trash');
-//   this._notify(UpdateType.DELETE_TASK);
-//   return this.#boardtasks;
-//  }
-
-//  hasBasketTasks() {
-//   return this.tasks.some(task => task.status === 'trash');
-// }
-
 
 deleteTask(taskId) {
   this.#boardtasks = this.#boardtasks.filter(task => task.id !== taskId);
@@ -107,34 +73,6 @@ hasBasketTasks() {
   return this.#boardtasks.some(task => task.status === 'trash');
   
 }
-
-
-
-
-
- 
-
-// updateTaskStatus(taskId, newStatus, position) {
-//   const taskIndex = this.#boardtasks.findIndex(task => task.id === taskId);
-//   if (taskIndex === -1) return;
-
-//   // Удаляем задачу из текущего списка
-//   const [task] = this.#boardtasks.splice(taskIndex, 1);
-//   task.status = newStatus;
-
-//   // Если позиция указана, находим её индекс и вставляем перед ней
-//   if (position) {
-//     console.log("position")
-//     const insertIndex = this.#boardtasks.findIndex(task => task.id === position);
-//     this.#boardtasks.splice(insertIndex, 0, task);
-//   }
-//   else {
-//     // Если позиция не указана, добавляем в конец нового статуса
-//     this.#boardtasks.push(task);
-
-//   }
-//   this._notify();
-// }
 
 async updateTaskStatus(taskId, newStatus, position) {
   const taskIndex = this.#boardtasks.findIndex(task => task.id === taskId);
@@ -176,15 +114,6 @@ async updateTaskStatus(taskId, newStatus, position) {
     throw err; // Прокидываем ошибку дальше
   }
 }
-
-
-
-
-
-
-
-
-
 }
 
 

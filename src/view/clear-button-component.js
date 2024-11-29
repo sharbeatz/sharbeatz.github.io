@@ -11,7 +11,6 @@ function createClearButtonComponentTemplate() {
       );
 }
 
-
 export default class ClearButtonComponent extends AbstractComponent {
   #handleClick = null;
   
@@ -32,7 +31,6 @@ export default class ClearButtonComponent extends AbstractComponent {
     } 
 }
   
-
 toggleDisabled(isDisabled) {
   const button = this.element.querySelector('button'); // Ищем кнопку внутри элемента
   if (button) {

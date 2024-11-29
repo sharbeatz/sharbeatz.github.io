@@ -165,11 +165,6 @@
     });
   }
   
-
-
-
-
-
     async #handleTaskDrop(taskId, newStatus, position) {
       try {
           await this.#tasksModel.updateTaskStatus(taskId, newStatus, position);
