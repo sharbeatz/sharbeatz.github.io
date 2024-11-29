@@ -119,29 +119,56 @@
     }
   }
 
-    #renderBoard() {
+  #renderBoard() {
+    render(this.#tasksBoardComponent, this.#boardContainer);
   
-      render(this.#tasksBoardComponent, this.#boardContainer);
-      Object.values(Status).forEach(status=> {
-        const tasksListComponent = new TasksListComponent({status: status, label: StatusLabel[status], onTaskDrop: this.#handleTaskDrop.bind(this)});
-        render (tasksListComponent, this.#tasksBoardComponent.element);
-
-        const tasksForStatus = this.getTasksByStatus(this.#boardTasks, status);
-        if (tasksForStatus.length == 0) {
-          render(new NoTasksComponent, tasksListComponent.element);
-          return;
-        }
-        tasksForStatus.forEach((task)=> {
-          render(new TaskComponent({task}), tasksListComponent.element);
-        }
-        );
-        if (status == Status.TRASH) {
+    Object.values(Status).forEach(status => {
+      const tasksListComponent = new TasksListComponent({
+        status: status,
+        label: StatusLabel[status],
+        onTaskDrop: this.#handleTaskDrop.bind(this),
+      });
+  
+      render(tasksListComponent, this.#tasksBoardComponent.element);
+  
+      const tasksForStatus = this.getTasksByStatus(this.#boardTasks, status);
+  
+      // Если задач для текущего статуса нет
+      if (tasksForStatus.length === 0) {
+        render(new NoTasksComponent(), tasksListComponent.element);
+  
+        // Проверяем статус корзины (TRASH)
+        if (status === Status.TRASH) {
           this.#renderClearButton(tasksListComponent.element);
+          this.#clearButtonComponent.toggleDisabled(!this.#tasksModel.hasBasketTasks());
+        }
+  
+        return;
+      }
+  
+      // Рендер задач
+      tasksForStatus.forEach(task => {
+        render(new TaskComponent({ task }), tasksListComponent.element);
+      });
+  
+      // Обрабатываем статус TRASH
+      if (status === Status.TRASH) {
+        this.#renderClearButton(tasksListComponent.element);
+  
+        // Логика для обновления состояния кнопки
+        if (tasksForStatus.length === 0) {
+          this.#clearButtonComponent.toggleDisabled(!this.#tasksModel.hasBasketTasks());
+        } else {
+          this.#clearButtonComponent.toggleDisabled(false); // Включаем кнопку, если есть задачи
         }
       }
-      )
-      
-    }
+    });
+  }
+  
+
+
+
+
 
     async #handleTaskDrop(taskId, newStatus, position) {
       try {
